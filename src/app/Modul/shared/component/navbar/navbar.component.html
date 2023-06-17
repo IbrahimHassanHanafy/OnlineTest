@@ -1,0 +1,42 @@
+<nav class="navbar bg-dark navbar-dark">
+
+  <div class="container d-sm-block d-lg-flex">
+      <ul class="navbar-nav flex-grow-1  d-flex flex-row justify-content-between">
+        <li class="nav-item">
+          <img src="{{image}}" alt="Avatar Logo" width="40px" height="40px"
+            class="rounded-pill bg-light">
+        </li>
+        <li class="nav-item d-flex align-items-center justify-content-between">
+  
+          <i class="bi {{iconClass}} text-light"></i>
+          <!-- <i class="bi bi-person-fill-lock text-light"></i> -->
+          <a class="nav-link ms-2" [routerLink]="['']" [routerLinkActive]="'text-danger fw-bold'"
+            [routerLinkActiveOptions]="{exact:true}" (click)="login()">{{loginData}}</a>
+            <!-- [routerLinkActiveOptions]="{exact:true}">Login</a> -->
+          <a class="nav-link ms-2" [routerLink]="['']" [routerLinkActive]="'text-danger fw-bold'"
+            [routerLinkActiveOptions]="{exact:true}" (click)="logout()">Logout</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav d-flex flex-row justify-content-center mx-auto">
+        <li class="nav-item">
+          <a class="nav-link ms-sm-0 ms-md-3" [routerLink]="['/home']" [routerLinkActive]="'text-danger fw-bold'"
+            [routerLinkActiveOptions]="{exact:true}">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ms-3" [routerLink]="['about']" [routerLinkActive]="'text-danger fw-bold'"
+            [routerLinkActiveOptions]="{exact:true}">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ms-3" [routerLink]="['topics']" [routerLinkActive]="'text-danger fw-bold'"
+            [routerLinkActiveOptions]="{exact:true}">Exam</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ms-3" [routerLink]="['contact']" [routerLinkActive]="'text-danger fw-bold'"
+            [routerLinkActiveOptions]="{exact:true}">Contact</a>
+        </li>
+      </ul>
+    </div>
+  
+  
+  </nav>
+  

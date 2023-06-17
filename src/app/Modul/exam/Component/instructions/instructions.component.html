@@ -1,0 +1,45 @@
+<!-- <div class="container">
+    <div class="row d-flex justify-content-center shadow m-5 p-5">
+        <div class="col-6">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item">Exam : {{topic.name}} </li>
+                <li class="list-group-item">Exam Duration : {{topic.durationExam}} </li>
+                <li class="list-group-item">No.of Questions : {{exam.question.length}}</li>
+                <li class="list-group-item"> you can choose your question by next and previous buttons</li>
+                <li class="list-group-item">you can end exam any time by clicking end exam button</li>
+                <li class="list-group-item"><input type="checkbox" [(ngModel)]="isChecked" (change)="testCheck()" >Are you ready ??</li>
+                <p  [class.opacity-0]="!flag" class="text-danger"> you have to check first </p>
+                <li class="list-group-item"><input type="button" (click)="takeExam()" value="start exam"></li>
+              </ul>
+        </div>
+    </div>
+</div> -->
+
+<div class="container">
+    <div class="row justify-content-center ">
+      <div class="col-6 shadow m-5 p-5">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Exam: <span class="fw-bold ">{{topic.name}}</span></li>
+          <li class="list-group-item">Exam Duration: <span class="fw-bold ">{{topic.durationExam}} minutes</span></li>
+          <li class="list-group-item">No. of Questions: <span class="fw-bold ">{{exam.question.length}}</span></li>
+          <li class="list-group-item">You can choose your question by using the <span class="fw-bold">Next</span> and 
+            <span class="fw-bold">Previous</span> buttons.</li>
+            
+            <li class="list-group-item" >You can end the exam at any time by clicking the 
+            <span class="fw-bold">End Exam</span> button.</li>
+          <li class="list-group-item">
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox" [(ngModel)]="isChecked" id="readyCheckbox" (change)="testCheck()">
+              <label class="form-check-label" for="readyCheckbox">Are you ready?</label>
+            </div>
+          </li>
+
+            <p class="text-danger mb-0" [class.opacity-0]="!flag">You must check the box above before starting the exam.</p>
+
+          <li class="list-group-item">
+            <button class="btn btn-primary m-auto d-block" (click)="takeExam()">Start Exam</button>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>

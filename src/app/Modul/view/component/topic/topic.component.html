@@ -1,0 +1,25 @@
+<section id="topic">
+    <div class="container bootstrap snippets bootdeys mt-5">
+        <h5 class="section-title h1 pt-5">OUR TOPIC</h5>
+        <div class="row">
+            <div *ngFor="let topic of Topics" class="col-md-4 col-sm-6 content-card">
+                <div class="card-big-shadow">
+                    <div class="card card-just-text" data-background="color" data-color="yellow" data-radius="none">
+                        <div class="content d-flex justify-content-between flex-column" style="height: inherit;">
+                            <h4 class="title"><a href="#">{{topic.name}}</a></h4>
+                            <p class="description">{{topic.desc}}</p>
+                            <div class="button">
+                                <a class="btn btn-primary text-light" routerLink="/topics/{{topic.id}}">
+                                    Go To Exam 
+                                </a>    
+                            </div>
+                             
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

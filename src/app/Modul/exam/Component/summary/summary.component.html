@@ -1,0 +1,84 @@
+<div class="container justify-content-center">
+  <div class="row text-center my-5">
+    <h1 class="display-3 text-shadow">
+      Summary Of <span class="fw-normal"> {{ topic.name }}</span> Quiz
+    </h1>
+  </div>
+
+  <div class="row fs-4">
+    <div class="col-4 text-center">
+      Total correct Answers :
+      <span class="fw-bold text-success">{{
+        correctAnswers + "/" + totalQuestions
+      }}</span>
+    </div>
+
+    <div class="col-4 text-center">
+      Your Score
+      <span class="fw-bold text-bg-success p-2">{{
+        ((correctAnswers / totalQuestions) * 100).toFixed(2) + "%"
+      }}</span>
+    </div>
+    <div class="col-4 text-center">
+      Time Spend =>
+      <span class="text-danger">
+        <span *ngIf="finalMinSpent < 10">0</span>{{ finalMinSpent }} :
+        <span *ngIf="finalSecSpent < 10">0</span>{{ finalSecSpent }}</span
+      >
+    </div>
+  </div>
+  <div class="container my-5">
+  <div class="row fs-4 justify-content-center">
+    <div class="col-4 border py-2"> <span class="py-1 px-3 mr-2 me-2 bg-dark-subtle"></span> Total Questions</div>
+    <div class="col-1 border py-2">{{ totalQuestions }}</div>
+  </div>
+  <div class="row fs-4 justify-content-center">
+    <div class="col-4 border py-2"><span class="py-1 px-3 mr-2 me-2" style="background-color:#f1c40f ;"></span>Attempted Questions</div>
+    <div
+      class="col-1 border py-2 text-warning"
+    >
+      {{ attemptedQuestions }}
+    </div>
+  </div>
+
+  <div class="row fs-4 justify-content-center">
+    <div class="col-4 border py-2"><span class="py-1 px-3 mr-2 me-2 bg-success"></span>Correct Answers</div>
+    <div
+      class="col-1 border py-2 text-success"
+    >
+      {{ correctAnswers }}
+    </div>
+  </div>
+
+  <div class="row fs-4 justify-content-center">
+    <div class="col-4 border py-2"><span class="py-1 px-3 mr-2 me-2 bg-danger" ></span>Incorrect Answers</div>
+    <div
+      class="col-1 border py-2 text-danger"
+    >
+      {{ incorrectAnswers }}
+    </div>
+  </div>
+
+  <div class="row fs-4 justify-content-center">
+    <div class="col-4 border py-2"><span class="py-1 px-3 mr-2 me-2" style="background-color: #fd9644;"></span>Unattempted Questions</div>
+    <div
+      class="col-1 border py-2 text-warning"
+    >
+      {{ unattemptedQuestions }}
+    </div>
+  </div>
+</div>
+
+  <div class="d-flex justify-content-center">
+    <a [routerLink]="['/home']" class="btn btn-dark rounded-2">Finish</a>
+  </div>
+
+ 
+
+
+  <!-- 
+1)summary (json send - egt) (url)   *
+2)error                               
+3)table (wuestions-coreect -user)    
+4)window for ensuring to end exam   *   
+   -->
