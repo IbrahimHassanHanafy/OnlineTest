@@ -17,11 +17,17 @@ import { throwError } from 'rxjs';
 export class HeroService {
   _Url : string = "http://localhost:3500/";
   id:number=0;
+  email:string='';
   constructor(private _http:HttpClient) { }
-  setId(id:number):any{
+  login(id:number,email:string):any{
     this.id=id;
-    
-    alert("in hero id ="+id)
+    this.email=email;
+    console.log("data from hero id= ",this.id,", email = ",this.email)
+    // alert("in hero id ="+id)
+  }
+  logout(){
+    this.id=0;
+    this.email='';
   }
   getId():Observable<User>{
   

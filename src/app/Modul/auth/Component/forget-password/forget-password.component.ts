@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/Models/user';
 import { AuthService } from '../../Service/auth.service';
+import { HeroService } from 'src/app/service/hero.service';
 
 @Component({
   selector: 'app-forget-password',
@@ -15,7 +16,8 @@ export class ForgetPasswordComponent {
     private fb:FormBuilder,
     private http:HttpClient,
     private route:Router,
-    private auth:AuthService
+    private auth:AuthService,
+    private hero:HeroService
   ){}
   forgetForm=this.fb.group({
     email: ['', [Validators.required, Validators.pattern(/^\w{3,}@\w{3,}.com$/)]],
@@ -37,7 +39,7 @@ export class ForgetPasswordComponent {
   data:User|null=null;
   checkEmail(){
     
-    this.http.get<User[]>(`http://localhost:3500/users?email=${this.email.value}`).subscribe((res:User[])=>{
+    this.http.get<User[]>(`${this.hero._Url}users?email=${this.email.value}`).subscribe((res:User[])=>{
       if(res.length!=0){
         this.data=res[0];
         this.showSearch=false;
@@ -77,13 +79,13 @@ export class ForgetPasswordComponent {
   }
   resetPassword(){
   
-    this.http.patch(`http://localhost:3500/users/${this.data?.id}`,{'password':this.password.value}).subscribe(res=>{
+    this.http.patch(`${this.hero._Url}users/${this.data?.id}`,{'password':this.password.value}).subscribe(res=>{
       alert("Reset Password Done !!");
      if(this.data!=null){
 
-       this.auth.setId(this.data.id)
+       this.auth.login(this.data.id,this.data.email);
+       this.route.navigateByUrl('home');
      }
-      this.route.navigateByUrl('home');
     })
   }
   get email(){

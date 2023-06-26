@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnDestroy } from '@angular/core';
+import { Component} from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { catchError, throwError } from 'rxjs';
 import { User } from 'src/app/Models/user';
 import { HeroService } from 'src/app/service/hero.service';
 
@@ -11,7 +10,7 @@ import { HeroService } from 'src/app/service/hero.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnDestroy {
+export class LoginComponent  {
 
   constructor(
     private fb: FormBuilder,
@@ -19,22 +18,17 @@ export class LoginComponent implements OnDestroy {
     private http: HttpClient,
     private hero:HeroService
   ) { }
-  ngOnDestroy(): void {
-    if(this.id!=0)
-    {console.log("id in login destroy"+this.id)
-  this.hero.setId(this.id);
-  
-  }
-  }
+
   passError: boolean = false;
   emailError: boolean = false;
-  _URL: string = 'http://localhost:3500/users';
   id: number = 0;
+  
   loginForm = this.fb.group({
     role: ['', Validators.required],
     email: ['', [Validators.required, Validators.pattern(/^\w{3,}@\w{3,}.com$/)]],
     password: ['', [Validators.required, Validators.pattern(/^[A-Z]{1}\w{7,}/)]]
   })
+
   get email() {
     return this.loginForm.get('email') as FormControl;
   }
@@ -49,14 +43,13 @@ export class LoginComponent implements OnDestroy {
   btnLogin(ev: Event) {
     ev.preventDefault();
     this.http.get<User[]>(
-      `${this._URL}?role=${this.role.value}&email=${this.email.value}`)
+      `${this.hero._Url}users?role=${this.role.value}&email=${this.email.value}`)
       .subscribe(
         res => {
           if (res.length != 0) {
             this.id = res[0].id;
-            // this.emailError = false;
             if (res[0].password == this.password.value) {
-              // this.passError = false;
+              this.hero.login(this.id,this.email.value);
               this.route.navigateByUrl('/home')
             } else {
               this.passError = true;
@@ -66,5 +59,13 @@ export class LoginComponent implements OnDestroy {
             this.passError = false;
           }
         })
+  }
+
+  canExit(){
+    if(this.loginForm.invalid&&(this.email.value||this.password.value ||this.role.value)){
+      return confirm("You will lose any unsaved Changes Are you sure you want to Cancel ?")
+    }else{
+      return true;
+    }
   }
 }

@@ -1,28 +1,20 @@
-import { Component, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormControl, Validators } from '@angular/forms';
-
 import { AuthService } from '../../Service/auth.service';
-
-import { HeroService } from 'src/app/service/hero.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { User } from 'src/app/Models/user';
 import { Router } from '@angular/router';
-
-
-
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css']
 })
-export class RegisterComponent implements OnDestroy {
-  constructor(private fb: FormBuilder, private auth: AuthService,private route:Router) { }
-  ngOnDestroy(): void {
-    if(this.id!=0){
-      console.log("register ondestroy id ="+this.id)
-    }
-  }
+export class RegisterComponent {
+  constructor(
+    private fb: FormBuilder,
+    private auth: AuthService,
+    private route: Router,
+  ) { }
+
   registerForm = this.fb.group({
     role: ['', [Validators.required]],
     email: ['', [Validators.required, Validators.pattern(/^\w{3,}@\w{3,}.com$/)]],
@@ -34,16 +26,28 @@ export class RegisterComponent implements OnDestroy {
       childhoodNickname: ['', [Validators.required, Validators.minLength(2)]],
       motherMiddleName: ['', [Validators.required, Validators.minLength(2)]],
     }),
-
     userName: ['', [Validators.required, Validators.pattern(/^\w{3,}\ \w{3,}$/)]],
     password: ['', [Validators.required, Validators.pattern(/^[A-Z]{1}\w{7,}/)]],
     address: this.fb.group({
-      state: ['', [Validators.required,Validators.pattern(/^\w{3,}$/)]],
-      city: ['', [Validators.required,Validators.pattern(/^\w{3,}$/)]],
+      state: ['', [Validators.required, Validators.pattern(/^\w{3,}$/)]],
+      city: ['', [Validators.required, Validators.pattern(/^\w{3,}$/)]],
       postalCode: ['', [Validators.required, Validators.pattern(/^\w{3,}$/)]]
     })
   })
 
+
+  userdata: any;
+  id: number = 0;
+  addUser() {
+    this.userdata = { ...this.registerForm.value };
+    this.auth.addUser(this.userdata).subscribe((res => {
+      this.id = res.id;
+      this.auth.login(res.id,res.email);
+  
+      this.route.navigateByUrl("home");
+
+    }));
+  }
   get role() {
     return this.registerForm.controls.role as FormControl;
   }
@@ -85,37 +89,23 @@ export class RegisterComponent implements OnDestroy {
   get postalCode() {
     return this.registerForm.controls.address.controls.postalCode as FormControl;
   }
- 
- 
- 
 
-  userdata: any;
-  id: number = 0;
-  srcfromdb: string = '../../../../../assets/user.jpg';
-  addUser() {
-    this.userdata = { ...this.registerForm.value, "image": this.srcfromdb };
-    this.auth.imagePath = this.srcfromdb;
-    this.auth.addUser(this.userdata).subscribe((res => {this.id = res.id;
-      this.auth.login(this.id);
-      alert(`id is = ${this.id}`);
-      this.route.navigateByUrl("home");
-      
-    }));
-    // this.auth.login(this.id);
-   
-    //this res return data and id that craete in json server
 
+  
+  canExit() {
+    if (this.registerForm.invalid && (
+      this.email.value || this.role.value || this.userName.value || this.age.value
+      || this.phone.value || this.password.value || this.gender.value || this.city.value
+      || this.state.value || this.postalCode.value || this.motherMiddleName.value
+      || this.childhoodNickname.value || this.firstSchoolName.value
+      )
+    ) {
+
+      return confirm("You will lose any unsaved Changes Are you sure you want to Cancel ?")
+    } else {
+      return true;
+    }
   }
-
-
-  printImage(e: any) {
-    this.arrOfImage.push(e.target.files[0]);
-    console.log(this.arrOfImage[0])
-    this.srcfromdb = URL.createObjectURL(e.target.files[0]);
-
-  }
-  arrOfImage: File[] = [];
-
 
 
 }

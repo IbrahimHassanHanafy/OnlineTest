@@ -1,29 +1,32 @@
-import { Component } from '@angular/core';
+import { Component, DoCheck, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/Modul/auth/Service/auth.service';
+import { HeroService } from 'src/app/service/hero.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.css']
 })
-export class NavbarComponent {
-  iconClass:string='bi-person-fill-lock';
-  loginData:string='login';
-  image:string="assets/user.jpg"
-  // constructor(private authService:AuthService) {
+export class NavbarComponent implements DoCheck{
+  constructor(private auth:AuthService,private hero:HeroService,private activatedaroute:ActivatedRoute){
 
-  // C:\fakepath\c1_auto_x2.jpg
-  // }
-   login(){
-     this.loginData="Ibrahim@gmail.com"
-     this.iconClass="bi-unlock-fill";
-     this.image='assets/test.jpg';
+  }
+  ngDoCheck(): void {
+    this.id=this.hero.id;
+    this.email=this.hero.email;
+  }
+ 
+  
 
-  //   this.authService.login();
-   }
+id:number=0;
+email:string='';
+
    logout(){
-    this.iconClass='bi-person-fill-lock';
-    this.loginData='login';
-    this.image="assets/user.jpg"
-  //   this.authService.logOut();
+    if(confirm("Are you Sure you want to  log out")){
+      this.hero.logout();
+    }
+    
+
   }
 }

@@ -12,13 +12,14 @@ export class AuthService {
 
 
   constructor(private hero:HeroService) { }
+id:number=0;
+email:string='';
 
-imagePath:any;
-  login(id:number){
-    return this.hero.id=id;
-  }
-  setId(id:number):Observable<number>{
-    return this.hero.setId(id)
+
+  login(id:number,email:string):Observable<number>{
+    this.id=id;
+    this.email=email;
+    return this.hero.login(id,email)
   }
 
 

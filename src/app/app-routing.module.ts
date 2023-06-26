@@ -10,19 +10,25 @@ import { InstructionsComponent } from './Modul/exam/Component/instructions/instr
 import { QuestionComponent } from './Modul/exam/Component/question/question.component';
 import { SummaryComponent } from './Modul/exam/Component/summary/summary.component';
 import { TopicComponent } from './Modul/view/component/topic/topic.component';
+import { AuthguardService } from './service/authguard.service';
+import { ForgetPasswordComponent } from './Modul/auth/Component/forget-password/forget-password.component';
 
 const routes: Routes = [
   {path:'',redirectTo:'home',pathMatch:'full'},
-  {path:'home', component:HomeComponent},
+  {path:'home', component:HomeComponent,resolve:[AuthguardService]},
   {path:'about', component:AboutComponent},
-  {path:'contact', component:ContactComponent},
-  {path:'login', component:LoginComponent},
-  {path:'register', component:RegisterComponent},
-  {path:'topics', component:TopicComponent},  
-  {path:'topics/:id',children:[
-    {path:'',component:InstructionsComponent},
-    {path:'question', component:QuestionComponent},
-    {path:'question/summary/:summaryId', component:SummaryComponent},
+  {path:'contact', component:ContactComponent,
+    canDeactivate:[(component:ContactComponent)=>component.canExit()]
+  },
+
+  {path:'login', component:LoginComponent, canDeactivate: [(component: LoginComponent) => component.canExit()]},
+  {path:'register', component:RegisterComponent,canDeactivate:[(component:RegisterComponent)=>component.canExit()]},
+  {path:'forget-password',component:ForgetPasswordComponent},
+  {path:'topics',canActivateChild:[AuthguardService],children:[
+    {path:'', component:TopicComponent},
+    {path:':id',component:InstructionsComponent},
+    {path:':id/question', component:QuestionComponent},
+    {path:':id/question/summary/:summaryId', component:SummaryComponent},
   ]},
   {path:'**', component:NotfoundComponent}
 ];

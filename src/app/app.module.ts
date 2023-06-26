@@ -11,9 +11,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ExamModule } from './Modul/exam/exam.module';
 
 
+
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -24,6 +26,7 @@ import { ExamModule } from './Modul/exam/exam.module';
     FormsModule,
     HttpClientModule,
     ExamModule
+ 
   ],
   providers: [],
   bootstrap: [AppComponent]

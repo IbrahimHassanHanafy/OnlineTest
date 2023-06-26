@@ -3,13 +3,12 @@
     background: #eee !important;
 }
 
-body{margin-top:20px;}
+/* body{margin-top:20px;} */
 
 .card {
     background-color: #FFFFFF;
     color: #252422;
     margin-bottom: 20px;
-    height: 16rem;
 }
 
 
@@ -38,10 +37,7 @@ h6, .h6 {
     font-weight: 600;
     text-transform: uppercase;
 }
-.card .description {
-    font-size: 16px;
-    color: #66615b;
-}
+
 .content-card{
     margin-top:30px;    
 }

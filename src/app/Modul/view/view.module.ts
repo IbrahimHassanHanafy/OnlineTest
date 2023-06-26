@@ -12,6 +12,15 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
 import { SharedModule } from '../shared/shared.module';
 import { HomeComponent } from './component/home/home.component';
 import { MapComponent } from './component/map/map.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { NgbPaginationModule, NgbAlertModule, NgbRatingModule } from '@ng-bootstrap/ng-bootstrap';
+import { FeaturesComponent } from './component/features/features.component';
+import { TestIqComponent } from './component/test-iq/test-iq.component';
+import { SystemComponent } from './component/system/system.component';
+import { HomefirstComponent } from './component/homefirst/homefirst.component';
+import { VisionComponent } from './component/vision/vision.component';
+import { TeamsComponent } from './component/teams/teams.component';
+
 
 
 
@@ -25,13 +34,21 @@ import { MapComponent } from './component/map/map.component';
     TopicComponent,
     InstructorComponent,
     CommentsComponent,
-    MapComponent
+    MapComponent,
+    FeaturesComponent,
+    TestIqComponent,
+    SystemComponent,
+    HomefirstComponent,
+    VisionComponent,
+    TeamsComponent
   ],
   imports: [
     CommonModule,
     ViewRoutingModule,
     AppRoutingModule,
-    SharedModule
+    SharedModule,
+    ReactiveFormsModule,
+    NgbPaginationModule, NgbAlertModule,NgbRatingModule
   ],
 
 })

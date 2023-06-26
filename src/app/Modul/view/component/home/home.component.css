@@ -1,18 +1,7 @@
 
-.carousel-item {
-    height: 100vh;
-    min-height: 350px;
-    background:  no-repeat center center scroll;
-    background-size: cover;
-  }
-
 body{
   background-color: lightgray;
 }
 
-.carousel-caption { 
-  bottom:10%;
-  display: flex;
-  justify-content: space-evenly;
-  flex-direction: row;
-}
+
+

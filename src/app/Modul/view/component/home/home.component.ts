@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 Slider: any;
-
+id:any;
   constructor(private activatedRoute:ActivatedRoute) {
   }  
   ngOnInit(): void {

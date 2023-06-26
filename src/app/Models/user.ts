@@ -19,5 +19,4 @@ export interface User {
             city: string,
             postalCode:string,
           },
-          image:string;
 }
