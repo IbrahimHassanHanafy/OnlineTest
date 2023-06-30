@@ -27,7 +27,9 @@ const routes: Routes = [
   {path:'topics',canActivateChild:[AuthguardService],children:[
     {path:'', component:TopicComponent},
     {path:':id',component:InstructionsComponent},
-    {path:':id/question', component:QuestionComponent},
+    {path:':id/question', component:QuestionComponent,
+  canDeactivate:[(component:QuestionComponent)=>component.flag]
+  },
     {path:':id/question/summary/:summaryId', component:SummaryComponent},
   ]},
   {path:'**', component:NotfoundComponent}
